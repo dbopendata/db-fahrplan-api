@@ -65,7 +65,7 @@ paths:
       responses:
         200:
           description: The result is a list of possible matches (locations) where the user might pick one entry to perform a trip request with this location as origin or destination or to ask for a departure board or arrival board of this location (stops/stations only).
-          schema: 
+          schema:
             $ref: '#/definitions/LocationResponse'
 
   /departureBoard:
@@ -121,11 +121,17 @@ paths:
           in: query
           required: true
           type: string
+        -
+          name: direction
+          description: Id of the stop/station for the direction. The service can only be called for stops/stations by using according id retrieved by the location method.
+          in: query
+          required: false
+          type: string
       responses:
         200:
           description: The next 20 departures (or less if not existing) from a given point in time.
-          schema: 
-            $ref: '#/definitions/DepartureBoardResponse'      
+          schema:
+            $ref: '#/definitions/DepartureBoardResponse'
 
   /arrivalBoard:
     get:
@@ -179,6 +185,12 @@ paths:
           description: The time of arrivals.
           in: query
           required: true
+          type: string
+        -
+          name: direction
+          description: Id of the stop/station for the direction. The service can only be called for stops/stations by using according id retrieved by the location method.
+          in: query
+          required: false
           type: string
       responses:
         200:
